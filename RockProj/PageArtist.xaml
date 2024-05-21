@@ -1,0 +1,26 @@
+﻿<Page x:Class="RockProj.PageArtist"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RockProj"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="PageArtist">
+
+    <Grid>
+        <DataGrid x:Name="dataGridArtist" HorizontalAlignment="Left" FontSize="20" AutoGenerateColumns="False" IsReadOnly="True" Height="375" Margin="536,173,0,0" VerticalAlignment="Top" Width="620" SelectionChanged="dataGridArtist_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <TextBox x:Name="textBoxTitle" HorizontalAlignment="Left" FontSize="20" Height="37" Margin="184,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" RenderTransformOrigin="-0.894,0.59"/>
+        <Label Content="Название" HorizontalAlignment="Left" FontSize="20"  Margin="27,173,0,0" VerticalAlignment="Top" Width="108"/>
+        <Button x:Name="buttonAdd" Content="Добавить" FontSize="20"  HorizontalAlignment="Left" Margin="77,564,0,0" VerticalAlignment="Top" Width="259" Height="80" Click="buttonAdd_Click"/>
+        <Button x:Name="buttonDelete" Content="Удалить" FontSize="20"  HorizontalAlignment="Left" Margin="866,564,0,0" VerticalAlignment="Top" Width="258" Height="80" Click="buttonDelete_Click"/>
+        <Label Content="Список артистов" HorizontalAlignment="Left" FontSize="20"  Margin="623,118,0,0" VerticalAlignment="Top" Width="169"/>
+
+    </Grid>
+</Page>

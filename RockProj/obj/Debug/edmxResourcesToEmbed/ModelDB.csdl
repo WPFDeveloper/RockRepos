@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RockDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdArtist" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Artist" Relationship="Self.FK_Album_Artist" FromRole="Album" ToRole="Artist" />
+    <NavigationProperty Name="Track" Relationship="Self.FK_Track_Album" FromRole="Album" ToRole="Track" />
+  </EntityType>
+  <EntityType Name="Artist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Album" Relationship="Self.FK_Album_Artist" FromRole="Artist" ToRole="Album" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Track" Relationship="Self.FK_Track_Genre" FromRole="Genre" ToRole="Track" />
+  </EntityType>
+  <EntityType Name="Track">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdAlbum" Type="Int32" Nullable="false" />
+    <Property Name="IdGenre" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Size" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Album" Relationship="Self.FK_Track_Album" FromRole="Track" ToRole="Album" />
+    <NavigationProperty Name="Genre" Relationship="Self.FK_Track_Genre" FromRole="Track" ToRole="Genre" />
+  </EntityType>
+  <Association Name="FK_Album_Artist">
+    <End Role="Artist" Type="Self.Artist" Multiplicity="1" />
+    <End Role="Album" Type="Self.Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="IdArtist" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Track_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="1" />
+    <End Role="Track" Type="Self.Track" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Track">
+        <PropertyRef Name="IdAlbum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Track_Genre">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+    <End Role="Track" Type="Self.Track" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Track">
+        <PropertyRef Name="IdGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RockDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Album" EntityType="Self.Album" />
+    <EntitySet Name="Artist" EntityType="Self.Artist" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" />
+    <EntitySet Name="Track" EntityType="Self.Track" />
+    <AssociationSet Name="FK_Album_Artist" Association="Self.FK_Album_Artist">
+      <End Role="Artist" EntitySet="Artist" />
+      <End Role="Album" EntitySet="Album" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Track_Album" Association="Self.FK_Track_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="Track" EntitySet="Track" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Track_Genre" Association="Self.FK_Track_Genre">
+      <End Role="Genre" EntitySet="Genre" />
+      <End Role="Track" EntitySet="Track" />
+    </AssociationSet>
+    <FunctionImport Name="AddAlbum">
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="IdArtist" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddArtist">
+      <Parameter Name="Title" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddGenre">
+      <Parameter Name="Title" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddTrack">
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="IdAlbum" Mode="In" Type="Int32" />
+      <Parameter Name="IdGenre" Mode="In" Type="Int32" />
+      <Parameter Name="Duration" Mode="In" Type="Int32" />
+      <Parameter Name="Size" Mode="In" Type="Int32" />
+      <Parameter Name="Price" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteAlbum">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteArtist">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteGenre">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteTrack">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

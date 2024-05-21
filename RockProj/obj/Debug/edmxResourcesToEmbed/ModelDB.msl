@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище RockDBModelContainer" CdmEntityContainer="RockDBEntities">
+    <EntitySetMapping Name="Album">
+      <EntityTypeMapping TypeName="RockDBModel.Album">
+        <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IdArtist" ColumnName="IdArtist" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artist">
+      <EntityTypeMapping TypeName="RockDBModel.Artist">
+        <MappingFragment StoreEntitySet="Artist">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genre">
+      <EntityTypeMapping TypeName="RockDBModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Track">
+      <EntityTypeMapping TypeName="RockDBModel.Track">
+        <MappingFragment StoreEntitySet="Track">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
+          <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddAlbum" FunctionName="Хранилище RockDBModel.AddAlbum" />
+    <FunctionImportMapping FunctionImportName="AddArtist" FunctionName="Хранилище RockDBModel.AddArtist" />
+    <FunctionImportMapping FunctionImportName="AddGenre" FunctionName="Хранилище RockDBModel.AddGenre" />
+    <FunctionImportMapping FunctionImportName="AddTrack" FunctionName="Хранилище RockDBModel.AddTrack" />
+    <FunctionImportMapping FunctionImportName="DeleteAlbum" FunctionName="Хранилище RockDBModel.DeleteAlbum" />
+    <FunctionImportMapping FunctionImportName="DeleteArtist" FunctionName="Хранилище RockDBModel.DeleteArtist" />
+    <FunctionImportMapping FunctionImportName="DeleteGenre" FunctionName="Хранилище RockDBModel.DeleteGenre" />
+    <FunctionImportMapping FunctionImportName="DeleteTrack" FunctionName="Хранилище RockDBModel.DeleteTrack" />
+  </EntityContainerMapping>
+</Mapping>
